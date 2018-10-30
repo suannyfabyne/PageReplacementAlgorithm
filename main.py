@@ -14,8 +14,18 @@ def FIFO(nquadros, referencias):
 
 def OTM(nquadros, referencias):
     listaOTM = []
-    for i in referencias[:nquadros]:
-        listaOTM.append(i)
+    quadro = 0
+    flag = 0
+    for elem in referencias:
+        if(quadro < nquadros):
+            for j in listaOTM:
+                if (j == elem):
+                    flag=1
+            if(flag != 1):
+                listaOTM.append(elem)
+                quadro = quadro + 1
+            flag=0
+
     arrayMaior = []
     flag = 0
     pagina = 0
@@ -40,12 +50,22 @@ def OTM(nquadros, referencias):
         flag=0
         arrayMaior = []
         absoluto = -1
-    return pagina+nquadros
+    return pagina+quadro
 
 def LRU(nquadros, referencias):
     listaLRU = []
-    for i in referencias[:nquadros]:
-        listaLRU.append(i)
+    quadro = 0
+    flag = 0
+    for elem in referencias:
+        if(quadro < nquadros):
+            for j in listaLRU:
+                if (j == elem):
+                    flag=1
+            if(flag != 1):
+                listaLRU.append(elem)
+                quadro = quadro + 1
+            flag=0
+
     arrayMenor = []
     flag = 0
     pagina = 0
@@ -68,7 +88,7 @@ def LRU(nquadros, referencias):
             pagina = pagina + 1
         flag=0
         arrayMenor = []
-    return pagina+nquadros
+    return pagina+quadro
 
 txtfile = open('entry.txt', 'r')
 txt = txtfile.readlines()
